@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - User Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">User Registration</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <hr>
+        <a href="user_list.html" class="btn btn-success mt-3">View Registered Users</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            $('#registerForm').submit(function(event) {
+                event.preventDefault();
+                
+                let userData = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                };
+
+                users.push(userData);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                alert('User registered successfully!');
+                $('#registerForm')[0].reset();
+            });
+        });
+    </script>
+</body>
+</html>
